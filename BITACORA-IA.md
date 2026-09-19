@@ -91,3 +91,21 @@ Qué quedó sin verificar:
 Estrategia de herencia JPA para Usuario → Estudiante/Administrador (SINGLE_TABLE, JOINED o TABLE_PER_CLASS) — no decidida.
 Cómo se va a construir la interfaz de administración (no hay panel gratuito como en Django).
 Siguen pendientes de sesiones anteriores: transitividad de prerrequisitos, unidad del 60%, permisos de Administrador, validación de MATRICULA_INSTITUCIONAL.
+
+Sesión 5 — 2026-09-19 — Antigravity
+
+Qué pedí:
+Arrancar con la Fase 0 del backlog utilizando Maven y Java 21, resolviendo la limitación de que el entorno de trabajo no contaba con extensiones ni herramientas previas instaladas.
+
+Qué propuso el agente:
+- Implementar Maven Wrapper (mvnw / mvnw.cmd) para que el proyecto compile y gestione dependencias sin requerir Maven instalado en el sistema.
+- Configurar base de datos H2 en memoria por defecto para desarrollo (con consola web en /h2-console) y pruebas, evitando la fricción de requerir un servidor PostgreSQL local instalado para empezar a trabajar, dejando preparado el perfil postgres para cuando se necesite.
+- Configurar .vscode/extensions.json y settings.json para sugerir las extensiones oficiales de Java y Spring Boot con un clic.
+- Scaffolding completo de Spring Boot 3.4.3 con Java 21: dependencias (Web, Data JPA, Validation, Flyway, PostgreSQL, H2, springdoc-openapi Swagger, Testing), arquitectura en capas (domain, application, infrastructure, interfaces), migración Flyway baseline (V1__init.sql) y prueba base de carga de contexto.
+
+Qué acepté / rechacé y por qué:
+Acepté la propuesta de autonomía total (Maven Wrapper + H2 por defecto + configuración para el editor) porque desbloquea al equipo inmediatamente sin exigir instalaciones complejas en sus máquinas.
+
+Qué quedó sin verificar:
+- Conexión real contra una instancia física de PostgreSQL (se verificó con éxito sobre H2 en dev/test mediante tests automatizados con resultado BUILD SUCCESS).
+- Implementación de las entidades de dominio y migraciones de tablas específicas (correspondientes a la Fase 1 del backlog).
