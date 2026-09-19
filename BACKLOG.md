@@ -25,19 +25,19 @@
 
 ## Fase 1 — Entidades del dominio (sin bloqueos)
 
-- [ ] `Usuario` (clase base) — **decisión provisional**: estrategia de herencia JPA `JOINED` para
+- [x] `Usuario` (clase base) — **decisión provisional**: estrategia de herencia JPA `JOINED` para
       `Usuario → Estudiante / Administrador` (más flexible; se puede migrar después si hace falta).
       Marcar como decisión provisional, no definitiva, en el código (comentario o ADR corto).
-- [ ] `Estudiante`
-- [ ] `Administrador`
-- [ ] `Curso` (incluye `porcentajeMinimoAprobacion`, default 60)
-- [ ] `Grupo` (incluye `cupoMaximo`, default 30)
-- [ ] `Horario`
-- [ ] `Prerrequisito` + enum `TipoPrerrequisito` (`CURSO_APROBADO`, `MATRICULA_INSTITUCIONAL`)
-- [ ] `Inscripcion` + enum `EstadoInscripcion` (`INSCRITO`, `LISTA_ESPERA`, `RECHAZADA`, `CANCELADA`)
-- [ ] `HistorialAcademico`
-- [ ] `Notificacion`
-- [ ] Migraciones Flyway correspondientes a cada entidad
+- [x] `Estudiante`
+- [x] `Administrador`
+- [x] `Curso` (incluye `porcentajeMinimoAprobacion`, default 60)
+- [x] `Grupo` (incluye `cupoMaximo`, default 30)
+- [x] `Horario`
+- [x] `Prerrequisito` + enum `TipoPrerrequisito` (`CURSO_APROBADO`, `MATRICULA_INSTITUCIONAL`)
+- [x] `Inscripcion` + enum `EstadoInscripcion` (`INSCRITO`, `LISTA_ESPERA`, `RECHAZADA`, `CANCELADA`)
+- [x] `HistorialAcademico`
+- [x] `Notificacion`
+- [x] Migraciones Flyway correspondientes a cada entidad
 
 ## Fase 2 — CRUD y validaciones de forma (sin bloqueos)
 

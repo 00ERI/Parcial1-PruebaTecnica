@@ -109,3 +109,23 @@ Acepté la propuesta de autonomía total (Maven Wrapper + H2 por defecto + confi
 Qué quedó sin verificar:
 - Conexión real contra una instancia física de PostgreSQL (se verificó con éxito sobre H2 en dev/test mediante tests automatizados con resultado BUILD SUCCESS).
 - Implementación de las entidades de dominio y migraciones de tablas específicas (correspondientes a la Fase 1 del backlog).
+
+Sesión 6 — 2026-09-19 — Antigravity
+
+Qué pedí:
+Implementar la Fase 1 del backlog (entidades del dominio, enums, repositorios y migración Flyway) y generar un nuevo documento markdown que registre cada una de las pruebas automatizadas realizadas hasta el momento.
+
+Qué propuso el agente:
+- Implementar las entidades JPA según el modelo v4: Usuario con estrategia de herencia JOINED, Estudiante y Administrador; Curso (con porcentajeMinimoAprobacion default 60%); Prerrequisito con soporte de CURSO_APROBADO y MATRICULA_INSTITUCIONAL; Grupo (con cupoMaximo default 30 y cálculos de ocupación); Horario (con método de dominio seCruzaCon); Inscripcion; HistorialAcademico y Notificacion.
+- Crear los enums de dominio: TipoPrerrequisito, EstadoInscripcion, DiaSemana y TipoNotificacion.
+- Crear los 10 repositorios Spring Data JPA en la capa infrastructure/repositories.
+- Crear la migración Flyway V2__create_domain_tables.sql con llaves primarias, foráneas e índices para PostgreSQL y H2.
+- Diseñar y ejecutar pruebas unitarias de horarios (HorarioUnitTest) y pruebas de integración de persistencia JPA (DomainEntitiesPersistenceTest), alcanzando 11 pruebas exitosas con BUILD SUCCESS.
+- Crear el documento TESTS.md en la raíz del repositorio detallando el propósito, suite y estado de cada prueba.
+
+Qué acepté / rechacé y por qué:
+Acepté la implementación completa y la creación de TESTS.md, comprobando que las 11 pruebas pasaron al 100% y que las tareas de la Fase 1 en BACKLOG.md quedaron cubiertas.
+
+Qué quedó sin verificar:
+- Casos de uso de negocio en servicios (inscripción con validación de prerrequisitos, cola FIFO de lista de espera, promoción automática por cancelación y cruce de horarios), correspondientes a las Fases 2 y 3.
+- Controladores REST (interfaces api y admin).
