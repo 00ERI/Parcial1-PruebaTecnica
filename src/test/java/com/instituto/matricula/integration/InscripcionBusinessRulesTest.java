@@ -35,14 +35,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 class InscripcionBusinessRulesTest {
 
-    @Autowired private InscribirEstudianteService inscribirEstudianteService;
-    @Autowired private GestionarCursoService gestionarCursoService;
-    @Autowired private GestionarGrupoService gestionarGrupoService;
-    @Autowired private EstudianteRepository estudianteRepository;
-    @Autowired private GrupoRepository grupoRepository;
-    @Autowired private HorarioRepository horarioRepository;
-    @Autowired private InscripcionRepository inscripcionRepository;
-    @Autowired private NotificacionRepository notificacionRepository;
+    @Autowired
+    private InscribirEstudianteService inscribirEstudianteService;
+    @Autowired
+    private GestionarCursoService gestionarCursoService;
+    @Autowired
+    private GestionarGrupoService gestionarGrupoService;
+    @Autowired
+    private EstudianteRepository estudianteRepository;
+    @Autowired
+    private GrupoRepository grupoRepository;
+    @Autowired
+    private HorarioRepository horarioRepository;
+    @Autowired
+    private InscripcionRepository inscripcionRepository;
+    @Autowired
+    private NotificacionRepository notificacionRepository;
 
     private Estudiante estudiante;
     private Curso cursoProg1;
@@ -53,7 +61,8 @@ class InscripcionBusinessRulesTest {
         // Datos base: un estudiante y dos cursos
         estudiante = estudianteRepository.save(new Estudiante("Test Alumno", "alumno@test.edu", "EST-TEST-01"));
         cursoProg1 = gestionarCursoService.crearConPrerrequisitoInstitucional("PROG-T01", "Prog Test I", 3, 60.0);
-        cursoProg2 = gestionarCursoService.crearConPrerrequisitoCurso("PROG-T02", "Prog Test II", 3, 60.0, cursoProg1.getId());
+        cursoProg2 = gestionarCursoService.crearConPrerrequisitoCurso("PROG-T02", "Prog Test II", 3, 60.0,
+                cursoProg1.getId());
     }
 
     @Test
@@ -69,7 +78,8 @@ class InscripcionBusinessRulesTest {
     @Test
     @DisplayName("Debe rechazar inscripción cuando no cumple prerrequisitos de CURSO_APROBADO")
     void debeRechazarPorPrerrequisitosNoCumplidos() {
-        // cursoProg2 requiere haber aprobado cursoProg1, pero el estudiante no tiene historial
+        // cursoProg2 requiere haber aprobado cursoProg1, pero el estudiante no tiene
+        // historial
         Grupo grupo = gestionarGrupoService.crearConHorarioAleatorio(cursoProg2.getId(), 1, 30);
 
         assertThatThrownBy(() -> inscribirEstudianteService.inscribir(estudiante.getId(), grupo.getId()))
@@ -144,11 +154,13 @@ class InscripcionBusinessRulesTest {
         horarioRepository.save(new Horario(DiaSemana.LUNES, LocalTime.of(8, 0), LocalTime.of(10, 0), grupoA));
         horarioRepository.save(new Horario(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(11, 0), grupoB));
 
-        // Primero inscribir en grupoA (para cursoProg1, tiene prerrequisito institucional)
+        // Primero inscribir en grupoA (para cursoProg1, tiene prerrequisito
+        // institucional)
         inscribirEstudianteService.inscribir(estudiante.getId(), grupoA.getId());
 
         // Intentar inscribir en grupoB con cruce de horario debe fallar
-        // cursoProg2 requiere cursoProg1 aprobado, así que el rechazo será por prerrequisitos
+        // cursoProg2 requiere cursoProg1 aprobado, así que el rechazo será por
+        // prerrequisitos
         // Para probar solo cruce, creamos otro curso sin prerrequisito previo
         Curso cursoExtra = gestionarCursoService.crearConPrerrequisitoInstitucional("EXTRA-01", "Extra", 2, 60.0);
         Grupo grupoExtra = grupoRepository.save(new Grupo(1, cursoExtra));
